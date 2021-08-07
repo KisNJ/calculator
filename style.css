@@ -1,0 +1,99 @@
+body{
+    background-color: #ADD8E6;
+    text-align: center;
+}
+#main-div{
+    /*display: flex;
+    justify-content: center;*/
+    margin:auto;
+    width: 70%;
+    border: 2px gray solid;
+    border-radius: 10px;
+    background-color: beige;
+}
+#screen{
+    height:80%;
+    text-align: end;
+    border-radius: 10px;
+    background-color: rgb(206, 206, 206);
+    font-size: 11px;
+    font-family: Arial, Helvetica, sans-serif;
+    margin:3px
+}
+#previous-calc{
+    border-radius: 10px;
+    font-size: 7px;
+    padding-right: 5px;
+}
+#current-calc{
+    border-radius: 8px;
+    padding-right: 5px;
+    word-wrap: break-word;
+    word-break: break-all;
+}
+#numpad{
+    display:grid;
+    /*grid-template-columns: repeat(4,0.25fr);*/
+    grid-template-areas: 
+    "header header header header"
+    "sevenplace eightplace nineplace plu"
+    "fourplace fiveplace sixplace min"
+    "oneplace twoplace threeplace div"
+    "point zeroplace equal multi";
+    
+}
+.toppad{
+    grid-column:span 2;
+    
+}
+#decimal{
+    grid-area: point;
+}
+#zero{
+    grid-area: zeroplace;
+}
+#equals{
+    grid-area:equal;
+}
+#multiply{
+    grid-area:multi;
+}
+#plus{
+    grid-area:plu;
+}
+
+#minus{
+    grid-area:min;
+}
+
+#one{
+    grid-area: oneplace;
+}
+#two{
+    grid-area: twoplace;
+}
+#three{
+    grid-area: threeplace;
+}
+#three{
+    grid-area: threeplace;
+}
+#four{
+    grid-area: fourplace;
+}
+#five{
+    grid-area: fiveplace;
+}
+#six{
+    grid-area: sixplace;
+}
+#seven{
+    grid-area: sevenplace;
+}
+#eight{
+    grid-area: eightplace;
+}
+#nine{
+    grid-area: nineplace;
+}
+
