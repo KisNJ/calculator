@@ -1,9 +1,9 @@
 let operatorCount = -1;
 let numberPressed = -1;
-let firstCalc=true;
+let firstCalc = true;
 
-let finished=0;
-let parts="";
+let finished = 0;
+let parts = "";
 let numpad = document.querySelectorAll(".num");
 let currentCalc = document.querySelector("#current-calc");
 let previousCalc = document.querySelector("#previous-calc");
@@ -29,7 +29,7 @@ pageOperators.forEach((operator) => {
 let separator = "";
 function write(e) {
     currentCalc.textContent += this.getAttribute("data-value");
-    
+
     numberPressed++;
     console.log("number pressed " + numberPressed);
     //operatorCount++;
@@ -39,7 +39,7 @@ function operatorWrite(e) {
     let text = currentCalc.textContent.split("").join("");
     text = Array.from(text);
     console.log(text);
-    if (numberPressed == -1&&firstCalc==true) {
+    if (numberPressed == -1 && firstCalc == true) {
         //console.log("vissza")
         return;
     }
@@ -52,16 +52,16 @@ function operatorWrite(e) {
             operatorCount++;
         }
         else if (operatorCount >= 0) {
-            if(firstCalc==true){
+            if (firstCalc == true) {
                 calculate(currentCalc.textContent);
             }
-            else{
-                console.log("fent: "+previousCalc.textContent);
-                console.log("lent: "+currentCalc.textContent);
-                
-                let toFunction=previousCalc.textContent+currentCalc.textContent.substring(1);
-                console.log("egybe: "+toFunction);
+            else {
+                console.log("fent: " + previousCalc.textContent);
+                console.log("lent: " + currentCalc.textContent);
                 separator = this.getAttribute("id");
+                let toFunction = previousCalc.textContent + currentCalc.textContent.substring(1);
+                console.log("egybe: " + toFunction);
+
                 calculate(toFunction);
             }
             return;
@@ -77,71 +77,90 @@ function operatorWrite(e) {
 
 }
 function calculate(string) {
-    parts="";
-    console.log("ez szep "+separator);
+    parts = "";
+    console.log("ez szep " + separator);
+    if (string.includes("+")) {
+        separator = "plus";
+    }
+    
+    else if (string.includes("-")) { separator = "minus"; }
+    else if (string.includes("/")) { separator = "divide"; }
+    else if (string.includes("*")) { separator = "multiply"; }
     switch (separator) {
         case "plus":
             console.log("öszeadok")
 
             parts = string.split("+");
-            console.log("rászek: "+parts);
+            console.log("rászek: " + parts);
             console.log(parts);
             finished = parseFloat(parts[0]) + parseFloat(parts[1]);
+
+
             previousCalc.textContent = finished;
             clearCurrent();
             break;
+
+
         case "minus":
             console.log("kivonok")
             parts = string.split("-");
-            console.log("részek: "+parts);
-            if(firstCalc){
+            console.log("részek: " + parts);
+            if (firstCalc) {
                 finished = parseFloat(parts[0]) - parseFloat(parts[1]);
             }
-            else{
+            else {
                 finished = (parseFloat(parts[0]) - parseFloat(parts[1]));
             }
+
             
-            previousCalc.textContent = finished;
-            clearCurrent();
-            break;
+                previousCalc.textContent = finished;
+                clearCurrent();
+                break;
+            
+
         case "divide":
             parts = string.split("/");
             console.log(parts);
-            if((parseFloat(parts[1])==0)){
+            if ((parseFloat(parts[1]) == 0)) {
                 clearCurrent();
                 return;
             }
-            if(firstCalc){
+            if (firstCalc) {
                 finished = (parseFloat(parts[0]) / parseFloat(parts[1]));
                 previousCalc.textContent = finished.toFixed(3);
             }
-            else{
+            else {
                 finished = (parseFloat(parts[0]) / parseFloat(parts[1]));
                 previousCalc.textContent = finished.toFixed(3);
             }
-            clearCurrent();
-            break;
-        
+            
+                //previousCalc.textContent = finished;
+                clearCurrent();
+                break;
+            
+
         case "multiply":
             parts = string.split("*");
             console.log(parts);
-            if(firstCalc){
+            if (firstCalc) {
                 finished = parseFloat(parts[0]) * parseFloat(parts[1]);
             }
-            else{
-                finished =parseFloat(parts[0]) * parseFloat(parts[1]);
+            else {
+                finished = parseFloat(parts[0]) * parseFloat(parts[1]);
             }
             
-            previousCalc.textContent = finished;
-            clearCurrent();
-            break;
+                previousCalc.textContent = finished;
+                clearCurrent();
+                break;
+            
+
     }
-    firstCalc=false;
+    firstCalc = false;
     return finished;
 }
 
-function clearCurrent(){
-    currentCalc.textContent=" ";
+function clearCurrent() {
+    currentCalc.textContent = " ";
     operatorCount = -1;
     numberPressed = -1;
 }
